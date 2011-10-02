@@ -9,6 +9,20 @@ import (
 type proxy struct{}
 
 func (p *proxy) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	
+	if req.RawURL[0] == '/' {
+		newURL := "http://" + req.Host + req.RawURL
+		outReq, _ := http.NewRequest(req.Method, newURL, req.Body)
+
+		for k, vv := range req.Header {
+			for _, v := range vv {
+				outReq.Header.Add(k, v)
+			}
+		}
+
+		req = outReq
+	}
+
 	log.Println("request", req.Method, req.URL, req.UserAgent())
 	res, err := http.DefaultTransport.RoundTrip(req)
 	if err != nil {
@@ -33,8 +47,9 @@ func (p *proxy) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
 func main() {
 	p := &proxy{}
-	err := http.ListenAndServe(":8880", p)
+	err := http.ListenAndServe(":3128", p)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err.String())
 	}
 }
+
