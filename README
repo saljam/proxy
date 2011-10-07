@@ -1,3 +1,5 @@
+proxy - A simple transperent web proxy written in go.
+
 My neighbours have taken it a bit too far using my wireless (7
 devices? for 4 weeks?). Inspired by upside-down-ternet[1], I wrote this.
 :-)
@@ -13,6 +15,13 @@ of request manglers and response manglers.  A mangler is a function
 which takes a request/response, modifies it in some way, and returns
 the modified request/response.  Look at src/logger or src/upsidedown
 for examples.
+
+To forward all web traffic to the machine running the proxy (on
+192.168.1.11:3128), I use the following iptables commands on the router:
+
+iptables -t nat -A PREROUTING -s '!' 192.168.1.11 -p tcp --dport 80 -j DNAT --to 192.168.1.11:3128
+iptables -t nat -A POSTROUTING -s 192.168.1.0/255.255.255.0 -d 192.168.1.11 -j MASQUERADE
+iptables -A FORWARD -s 192.168.1.0/255.255.255.0 -d 192.168.1.11 -p tcp --dport 3128 -j ACCEPT
 
 Exercises for the reader: inject js, replace every flv with a rick roll.
 
