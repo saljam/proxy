@@ -3,7 +3,7 @@ package main
 import (
 	"http"
 	"log"
-	"proxy"
+	"bitbucket.org/saljam/proxy/proxy"
 )
 
 func logRequest(r *http.Request) *http.Request {
