@@ -4,7 +4,7 @@ import (
 	"os"
 	"http"
 	"log"
-	"bitbucket.org/saljam/proxy/proxy"
+	"bitbucket.org/saljam/proxy/src/proxy"
 	"bytes"
 	"image"
 	"image/jpeg"

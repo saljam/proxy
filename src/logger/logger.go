@@ -3,7 +3,7 @@ package main
 import (
 	"http"
 	"log"
-	"bitbucket.org/saljam/proxy/proxy"
+	"bitbucket.org/saljam/proxy/src/proxy"
 )
 
 func logRequest(r *http.Request) *http.Request {
@@ -13,7 +13,7 @@ func logRequest(r *http.Request) *http.Request {
 
 func main() {
 	p := &proxy.Proxy{
-		[]func(*http.Request)*http.Request{logRequest, logRequest},
+		[]func(*http.Request)*http.Request{logRequest},
 		[]func(*http.Response)*http.Response{},
 	}
 	err := http.ListenAndServe(":3128", p)

@@ -1,0 +1,20 @@
+My neighbours have taken it a bit too far using my wireless (7
+devices? for 4 weeks?). Inspired by upside-down-ternet[1], I wrote this.
+:-)
+
+src/proxy is the main proxy library.
+
+src/upsidedown is a proxy which flips every image requested through it.
+
+src/logger simply logs every request.
+
+To create you own proxy, create a proxy.Proxy object with a slice
+of request manglers and response manglers.  A mangler is a function
+which takes a request/response, modifies it in some way, and returns
+the modified request/response.  Look at src/logger or src/upsidedown
+for examples.
+
+Exercises for the reader: inject js, replace every flv with a rick roll.
+
+[1] http://www.ex-parrot.com/pete/upside-down-ternet.html
+
