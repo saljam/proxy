@@ -10,13 +10,13 @@ src/upsidedown is a proxy which flips every image requested through it.
 
 src/logger simply logs every request.
 
-To create you own proxy, create a proxy.Proxy object with a slice
-of request manglers and response manglers.  A mangler is a function
-which takes a request/response, modifies it in some way, and returns
-the modified request/response.  Look at src/logger or src/upsidedown
-for examples.
+To create your own proxy, make a proxy.Proxy object with a slice
+of request manglers and a slice of response manglers.  A mangler is a
+function which takes a request/response, modifies it in some way, and
+returns the modified request/response.  Look at src/logger or
+src/upsidedown for examples.
 
-To forward all web traffic to the machine running the proxy (on
+To forward all web traffic to the machine running the proxy (in my case on
 192.168.1.11:3128), I use the following iptables commands on the router:
 
 iptables -t nat -A PREROUTING -s '!' 192.168.1.11 -p tcp --dport 80 -j DNAT --to 192.168.1.11:3128
