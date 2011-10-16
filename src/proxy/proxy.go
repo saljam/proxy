@@ -6,9 +6,12 @@ import (
 	"io"
 )
 
+type ReqManglers []func(*http.Request) *http.Request
+type ResManglers []func(*http.Response) *http.Response
+
 type Proxy struct{
-	RequestManglers  []func(*http.Request) *http.Request
-	ResponseManglers []func(*http.Response) *http.Response
+	RequestManglers  ReqManglers
+	ResponseManglers ResManglers
 }
 
 func copyHeader(from, to http.Header) {
