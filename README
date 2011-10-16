@@ -1,20 +1,24 @@
 proxy - A simple transperent web proxy written in go.
 
-My neighbours have taken it a bit too far using my wireless (7
-devices? for 4 weeks?). Inspired by upside-down-ternet[1], I wrote this.
-:-)
+This was written after my neighbours have taken it a bit too far using
+my wireless and I wanted to have a bit of fun.  It was inspired by
+upside-down-ternet[1].  :-)
 
-src/proxy is the main proxy library.
+src/proxy is the main proxy library.  This repository also includes
+multiple simple proxies written using it:
 
-src/upsidedown is a proxy which flips every image requested through it.
+	upsidedown flips every image requested through it.
 
-src/logger simply logs every request.
+	logger simply logs every request.
 
-To create your own proxy, make a proxy.Proxy object with a slice
-of request manglers and a slice of response manglers.  A mangler is a
-function which takes a request/response, modifies it in some way, and
-returns the modified request/response.  Look at src/logger or
-src/upsidedown for examples.
+	rickroll takes a path to an flv file, and replaces every flv
+	request with its contents.  i.e. it turns every youtube video
+	into a rickroll.
+
+they all listen on port 3128.
+
+Look at src/logger or src/upsidedown for examples on how to write a
+custom proxy.
 
 To forward all web traffic to the machine running the proxy (in my case on
 192.168.1.11:3128), I use the following iptables commands on the router:
@@ -23,7 +27,6 @@ iptables -t nat -A PREROUTING -s '!' 192.168.1.11 -p tcp --dport 80 -j DNAT --to
 iptables -t nat -A POSTROUTING -s 192.168.1.0/255.255.255.0 -d 192.168.1.11 -j MASQUERADE
 iptables -A FORWARD -s 192.168.1.0/255.255.255.0 -d 192.168.1.11 -p tcp --dport 3128 -j ACCEPT
 
-Exercises for the reader: inject js, replace every flv with a rick roll.
+Exercises for the reader: inject js into all html pages.
 
 [1] http://www.ex-parrot.com/pete/upside-down-ternet.html
-

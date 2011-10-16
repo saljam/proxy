@@ -13,8 +13,8 @@ func logRequest(r *http.Request) *http.Request {
 
 func main() {
 	p := &proxy.Proxy{
-		ReqManglers{logRequest},
-		ResManglers{},
+		proxy.ReqManglers{logRequest},
+		proxy.ResManglers{},
 	}
 	err := http.ListenAndServe(":3128", p)
 	if err != nil {

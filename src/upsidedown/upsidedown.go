@@ -82,8 +82,8 @@ func logRequest(r *http.Request) *http.Request {
 
 func main() {
 	p := &proxy.Proxy{
-		RequestManglers: []func(*http.Request)*http.Request{logRequest},
-		ResponseManglers: []func(*http.Response)*http.Response{flipImageRes},
+		proxy.ReqManglers{logRequest},
+		proxy.ResManglers{flipImageRes},
 	}
 	err := http.ListenAndServe(":3128", p)
 	if err != nil {
