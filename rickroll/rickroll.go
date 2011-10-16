@@ -6,7 +6,7 @@ import (
 	"log"
 	"fmt"
 	"flag"
-	"bitbucket.org/saljam/proxy/src/proxy"
+	"bitbucket.org/saljam/proxy/proxy"
 )
 
 func rickRoll(res *http.Response) *http.Response {
