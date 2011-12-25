@@ -45,6 +45,6 @@ func main() {
 
 	err := http.ListenAndServe(":3128", p)
 	if err != nil {
-		log.Fatal("ListenAndServe: ", err.String())
+		log.Fatal("ListenAndServe: ", err)
 	}
 }
