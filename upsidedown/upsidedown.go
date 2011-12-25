@@ -2,7 +2,7 @@ package main
 
 import (
 	"os"
-	"net.http"
+	"net/http"
 	"log"
 	"bitbucket.org/saljam/proxy/proxy"
 	"bytes"
