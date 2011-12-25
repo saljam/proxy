@@ -23,7 +23,7 @@ func copyHeader(from, to http.Header) {
 }
 
 func canonicalizeURL(req *http.Request) *http.Request {
-	newURL := "http://" + req.Host + req.RawURL
+	newURL := "http://" + req.Host + req.URL.RawPath
 	outReq, _ := http.NewRequest(req.Method, newURL, req.Body)
 	copyHeader(req.Header, outReq.Header)
 	return outReq
