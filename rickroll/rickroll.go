@@ -2,7 +2,7 @@ package main
 
 import (
 	"os"
-	"http"
+	"net.http"
 	"log"
 	"fmt"
 	"flag"

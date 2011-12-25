@@ -1,7 +1,7 @@
 package proxy
 
 import (
-	"http"
+	"net/http"
 	"log"
 	"io"
 )
