@@ -16,7 +16,7 @@ type imgBuffer struct{
 	*bytes.Buffer
 }
 
-func (b imgBuffer) Close() os.Error {
+func (b imgBuffer) Close() error {
 	return nil
 }
 
