@@ -4,7 +4,6 @@ import (
 	"os"
 	"net/http"
 	"log"
-	"fmt"
 	"flag"
 	"bitbucket.org/saljam/proxy/proxy"
 )

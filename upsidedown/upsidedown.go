@@ -1,7 +1,6 @@
 package main
 
 import (
-	"os"
 	"net/http"
 	"log"
 	"bitbucket.org/saljam/proxy/proxy"
