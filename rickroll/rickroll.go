@@ -16,7 +16,7 @@ func rickRoll(res *http.Response) *http.Response {
 
 	if res.Header["Content-Type"][0] == "video/x-flv" {
 		res.Header.Del("Content-Length")
-		if file, err := os.Open(filename); err == nil {
+		if file, err := os.Open(*filename); err == nil {
 			res.Body = file
 			log.Println("win!")
 		} else {
@@ -26,18 +26,11 @@ func rickRoll(res *http.Response) *http.Response {
 	return res
 }
 
-var filename string
+var filename = flag.String("filename", "", "Path to the replacement .flv file.")
 
 func main() {
 	flag.Parse()
-	args := flag.Args()
-	if len(args) != 1 {
-		fmt.Fprintln(os.Stderr, "usage: rickroll filename")
-		os.Exit(2)
-	}
-
-	filename = args[0]
-
+	
 	p := &proxy.Proxy{
 		proxy.ReqManglers{},
 		proxy.ResManglers{rickRoll},
