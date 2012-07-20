@@ -23,13 +23,14 @@ import (
 	"io"
 )
 
-// ReqManglers and ResManglers are a slice of fucntions which modify requests
-// and replies respectively.
+// ReqManglers are a slice of fucntions which modify requests.
 // These functions must have the signature:
 //	func(*http.Request) *http.Request
-// or:
-//	func(*http.Response) *http.Response
 type ReqManglers []func(*http.Request) *http.Request
+
+// ResManglers are a slice of fucntions which modify responses.
+// These functions must have the signature:
+//	func(*http.Response) *http.Response
 type ResManglers []func(*http.Response) *http.Response
 
 // Proxy implements http.Handler.
@@ -44,13 +45,6 @@ func copyHeader(from, to http.Header) {
 			to.Add(hdr, item)
 		}
 	}
-}
-
-func canonicalizeURL(req *http.Request) *http.Request {
-	newURL := "http://" + req.Host + req.URL.Path
-	outReq, _ := http.NewRequest(req.Method, newURL, req.Body)
-	copyHeader(req.Header, outReq.Header)
-	return outReq
 }
 
 // ServeHTTP proxies the request given and writes the response to w.
